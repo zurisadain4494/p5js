@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+    
+    <script>
+        function setup() {
+            createCanvas(800,600);
+            
+            background(244, 204, 204);
+            
+            //head
+            fill(0,0,0);//hair
+            rect(300,0,200,120);//hair
+            fill(252, 229, 205);
+            rect(320,20,160,100);//head
+            fill(0,0,0);
+            ellipse(360,40,40,40);//left eye
+            strokeWeight(3);
+            ellipse(440,40,40,40);//right eye
+            line(340,80,460,80);//mouth
+            
+            
+            //neck
+            fill(17,85,204);
+            rect(380,120,40,40);
+            
+            //body
+            fill(159, 197, 232);
+            ellipse(400,310,160,300);
+        
+            //text
+            fill(0,0,0);
+            textSize(20);
+            textFont('Dancing Script');
+            text("Mr. Smart" ,360,310);
+            
+            //right arm
+            stroke(191, 144, 0);
+            line(480,320,580,180);
+            
+            //left arm
+            stroke(191, 144, 0);
+            line(220,380,320,280);
+            
+            //left foot
+            stroke(127, 96, 0);
+            strokeWeight(8);
+            line(300,540,360,440);
+            
+            //right foot
+            stroke(127, 96, 0);
+            strokeWeight(8);
+            line(440,440,500,540);
+            
+        }
+
+        function draw() {
+            
+        }
+    </script>
+</head>
+
+<body>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/zurisadain4494/p5js/blob/master/zoog.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+</html>
