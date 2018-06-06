@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>Pong</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.13/p5.js"></script>
+    <script>
+        // global variables, able to be used in all functions
+        var ballX; // xlocation of the ball
+        var ballY; // y-location of the ball
+        var ballSpeedX = 5; // speed of the ball horizontally
+        var ballSpeedY = 5; // speed of the ball vertically
+        var paddleHeight = 30; // height of the paddle
+        var ballColorR =255
+        var ballColorG = 255
+        var ballColorB= 255
+        var paddleColorR = 255
+        var paddleColorG = 255
+        var paddleColorB = 255
+        var obstacleX1 
+        var obstacleX2
+        var obstacleX3
+        var obstacleY1
+        var obstacleY2
+        var obstacleY3
+        var score = 0
+        
+        function setup() {
+            createCanvas(800, 600);
+           // background(248,236,252);// canvas size
+            // noCursor(); // hides the mouse
+            ballX = random(width);  // start the ball in the
+            ballY = random(height/2); // top half of the canvas
+            
+            obstacleX1 = random(700)
+            obstacleY1 = random(300)
+            obstacleX2 = random(700)
+            obstacleY2 = random(300)
+            obstacleX3 = random(700)
+            obstacleY3 = random(300)
+
+        }
+
+        function draw() {
+            background(252,226,244); // resets the background
+            moveBall(); // ball moves in X and Y directions
+            checkCollide(); // checks for collision with walls or paddle
+            drawPaddle(); // re-draws paddle
+            drawBall(); // re-draws ball 
+            stroke(0)
+            strokeWeight(4)
+            rect(obstacleX1,obstacleY1,100,50)
+            rect(obstacleX2,obstacleY2,100,50)
+            rect(obstacleX3,obstacleY3,100,50)
+            fill(0)
+            strokeWeight(1)
+            textFont()
+            textSize(30)
+            fill(75,126,255)
+            text("SCORE:" + score,635,35)
+        }
+
+
+        function moveBall() {
+            ballX = ballX + ballSpeedX; // updates ball location horizontally
+            ballY = ballY + ballSpeedY; // updates ball location vertically
+
+            // monitor speed/direction of ball
+            console.log("ballSpeedX: " + ballSpeedX + ", ballSpeedY: " + ballSpeedY);
+        }
+
+        function checkCollide() {
+            // left/right edges
+            if (ballX < 0 || ballX > width) {
+                ballSpeedX = ballSpeedX * -1; // switch X direction
+            }
+
+            // top edge
+            if (ballY < 0) {
+                ballSpeedY = ballSpeedY * -1; // switch Y direction
+            }
+
+            // paddle
+            if (ballY > height - paddleHeight) { // ball is past 'goal line' vertically
+                if (ballX > mouseX && ballX < mouseX + 200) { // ball is within paddle horizontally
+                    ballSpeedY = ballSpeedY * -1; // switch Y direction
+                    ballColorR = random(255)
+                    ballColorG = random(255)
+                    ballColorB = random(255)
+                    
+                    paddleColorR = random(255)
+                    paddleColorG = random(255)
+                    paddleColorB = random(255)
+                    
+                    score ++ 
+                }
+                else { // ball is on the left or right side of the paddle
+                    text("GAME OVER!", width / 2, height / 2);
+                    noLoop(); // stop the draw loop
+                }
+            }
+            
+            //OBSTACLES
+            
+            if(ballX < obstacleX1+100 && ballY > obstacleY1 && ballY < obstacleY1+50 && ballX > obstacleX1 + 90) { //R
+                ballSpeedX = ballSpeedX * -1
+            }
+            if (ballX > obstacleX1 && ballY > obstacleY1 && ballY < obstacleY1+50 && ballX < obstacleX1 +10) {
+                ballSpeedX = ballSpeedX * -1
+            }
+            if (ballY > obstacleY1 && ballX > obstacleX1 && ballX < obstacleX1+100 && ballY < obstacleY1 + 10) {
+                ballSpeedY = ballSpeedY * -1
+            }
+            if (ballY < obstacleY1+50 && ballX > obstacleX1 && ballX < obstacleX1+100 && ballY > obstacleY1 + 10) {
+                ballSpeedY = ballSpeedY * -1
+            }
+        }
+
+        function drawBall() {
+            noStroke(); // no outline
+            fill(ballColorR, ballColorG, ballColorB)
+            ellipse(ballX, ballY, 20, 20); // draw a small ball at the current (x,y) location
+        }
+
+        function drawPaddle() {
+            strokeWeight(4); // border thickness of 4px
+            fill(paddleColorR, paddleColorG, paddleColorB)
+
+            // rectangle y-value is always at the bottom, but shifted up the height of paddle and the border of paddle
+            rect(mouseX, height - paddleHeight - 4, 200, paddleHeight);
+        }
+        
+            
+    </script>
+</head>
+
+<body>
+<form><input TYPE="button" onClick="history.go(0)" value="Reset"></form>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/zurisadain4494/p5js/blob/master/pong-trial.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+</html>
